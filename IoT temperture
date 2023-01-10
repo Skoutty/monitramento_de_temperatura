@@ -1,0 +1,43 @@
+// C++ code
+// Definindo portas conectadas
+int pinLed = 8;
+int pinBuzzer = 7;
+int pinTMP = A0;
+int pinMotor = 6;
+//Definindo valor de temperatura inicial
+int vlrTMP = 0;
+
+//Definido status inicial de componentes
+void setup()
+{
+  Serial.begin(9600);
+  pinMode(pinLed, OUTPUT);
+  pinMode(pinBuzzer, OUTPUT);
+  pinMode(pinMotor, OUTPUT);
+  pinMode(pinTMP, INPUT);
+}
+//Definindo função/repetição
+void loop()
+{
+  digitalWrite(pinLed, LOW);
+  digitalWrite(pinBuzzer, LOW);
+  digitalWrite(pinMotor, LOW);
+  vlrTMP = analogRead(pinTMP);//Lê valor do Sensor
+  Serial.print("Valor de Temperatura:= ");//Mostra mensagem
+  Serial.println(vlrTMP);
+  
+  if(vlrTMP >= 164)//Ação caso temperatura chegue em 30C
+  {
+    digitalWrite(pinBuzzer, LOW);
+    digitalWrite(pinLed, LOW);
+    digitalWrite(pinMotor, HIGH);
+  }
+  
+  if(vlrTMP >= 207)//Ação caso temperatura chegue em 50C
+  {
+  	 digitalWrite(pinBuzzer, HIGH);
+    digitalWrite(pinLed, HIGH);
+    digitalWrite(pinMotor, HIGH);
+  }
+
+}
